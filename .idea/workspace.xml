@@ -27,6 +27,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProjectId" id="1lIsVbYVu617folQ8iikpjgDmGo" />
   <component name="ProjectViewState">
@@ -35,7 +36,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/massTestApp" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -58,16 +59,17 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1134" y="597" key="FileChooserDialogImpl" timestamp="1607296538877">
+    <state x="1134" y="597" key="FileChooserDialogImpl" timestamp="1607297573293">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1134" y="597" key="FileChooserDialogImpl/0.0.2560.1400@0.0.2560.1400" timestamp="1607296538877" />
-    <state x="1098" y="653" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607296931873">
+    <state x="1134" y="597" key="FileChooserDialogImpl/0.0.2560.1400@0.0.2560.1400" timestamp="1607297573293" />
+    <state x="1098" y="653" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607297515772">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1098" y="653" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1400@0.0.2560.1400" timestamp="1607296931873" />
+    <state x="1098" y="653" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1400@0.0.2560.1400" timestamp="1607297515772" />
     <state x="908" y="289" key="new project wizard" timestamp="1607296847286">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
