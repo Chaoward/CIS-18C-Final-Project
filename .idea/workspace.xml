@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="48ec0610-a6f1-4ad5-acab-1e554abc2fd7" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,11 +48,26 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
     <state x="1134" y="597" key="FileChooserDialogImpl" timestamp="1607296538877">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1134" y="597" key="FileChooserDialogImpl/0.0.2560.1400@0.0.2560.1400" timestamp="1607296538877" />
+    <state x="1098" y="653" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607296931873">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1098" y="653" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1400@0.0.2560.1400" timestamp="1607296931873" />
     <state x="908" y="289" key="new project wizard" timestamp="1607296847286">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
