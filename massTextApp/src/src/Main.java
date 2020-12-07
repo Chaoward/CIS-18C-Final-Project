@@ -45,12 +45,13 @@ public class Main {
                         "1. Add/Remove/Display Contacts\n" +
                         "2. Add/Remove/Display src.Messages\n3. Send Message");
                 if (userChoice == 1) {
-                    System.out.println("1. Add contact\n2. Remove contact\n3. Display contacts\n");
+                    System.out.println("1. Add contact\n2. Remove contact\n3. Display all contacts\n");
                     if (userChoice == 1) {
 
                     } else if (userChoice == 2) {
 
                     } else if (userChoice == 3) {
+                        System.out.println("");
 
                     } else {
                         System.out.println("Invalid option");
@@ -59,7 +60,7 @@ public class Main {
 
                 } else if (userChoice == 2) {
                     if (userChoice == 1) {
-                        System.out.println("1. Add message\n2. Remove message\n3. Display message\n");
+                        System.out.println("1. Add message\n2. Remove message\n3. Display all message\n");
                         if (userChoice == 1) {
 
                         } else if (userChoice == 2) {
