@@ -28,7 +28,7 @@ public class Messages {
     }
 
     //set message that will be used
-    setMessage(String m) {
+    void setMessage(String m) {
         this.message = m;
         //Check if the name also exists and set the name in the message
         if (itemExists(this.name)) {
@@ -37,7 +37,7 @@ public class Messages {
     }
 
     //set name to be used in the message
-    setName(String n){
+    void setName(String n){
         this.name = n;
         //Check if the message also exists and set the name in the message
         if(itemExists(this.message)){
@@ -46,7 +46,7 @@ public class Messages {
     }
 
     //Set title for the message
-    setTitle(String t){
+    void setTitle(String t){
         this.title = t;
     }
 
