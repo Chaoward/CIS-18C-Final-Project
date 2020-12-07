@@ -41,7 +41,8 @@ public class Main {
                 System.out.println("Access Granted");
                 int userChoice = 0;
 
-                System.out.println("Hello " + username + ",\nWhat would you like to do? \n1. Add/Remove/Display Contacts\n" +
+                System.out.println("Hello " + username + ",\nWhat would you like to do? \n" +
+                        "1. Add/Remove/Display Contacts\n" +
                         "2. Add/Remove/Display Messages\n3. Send Message");
                 if (userChoice == 1) {
                     System.out.println("1. Add contact\n2. Remove contact\n3. Display contacts\n");
