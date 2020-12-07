@@ -39,6 +39,15 @@ public class Main {
             String password = input.nextLine();
             if (foundUser.getPassword().equals(password)) {
                 System.out.println("Access Granted");
+            int choice = 3;
+            String displayChoice;
+
+            switch (choice){
+                case 1: displayChoice = "Contacts";
+                case 2: displayChoice = "Messages";
+                case 3: displayChoice = "End program";
+            }
+
             } else {
                 System.out.println("Access Denied");
             }
