@@ -13,7 +13,7 @@ public class Main {
         // Maps Username to User
         HashMap<String, Integer> userIndex = new HashMap();
         HashMap<String, Integer> passwordIndex = new HashMap();
-        users.add(new User("User","password", 45));
+        users.add(new User("user","password"));
 
         // Create index at the end
 
@@ -22,7 +22,7 @@ public class Main {
             passwordIndex.put(users.get(i).getPassword(), i);
         }
 
-        System.out.println("Please log in. Enter your username:");
+        System.out.println("Please log in.\nEnter your username:");
         String username = input.nextLine();
         // if (foundUser == null) {
         if (!(userIndex.containsKey(username))) {
