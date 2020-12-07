@@ -44,7 +44,7 @@ public class Main {
                 System.out.println("Hello " + username + "What would you like to do? \n 1. Add/Remove/Display Contacts\n" +
                         "2. Add/Remove/Display Messages\n 3. Send Message");
                 if (userChoice == 1) {
-                    System.out.println("1. Add contact\n 2. Remove contact\n 3. Display contacts\n");
+                    System.out.println("1. Add contact\n2. Remove contact\n3. Display contacts\n");
                     if (userChoice == 1) {
 
                     } else if (userChoice == 2) {
@@ -58,7 +58,7 @@ public class Main {
 
                 } else if (userChoice == 2) {
                     if (userChoice == 1) {
-                        System.out.println("1. Add message\n 2. Remove message\n 3. Display message\n");
+                        System.out.println("1. Add message\n2. Remove message\n3. Display message\n");
                         if (userChoice == 1) {
 
                         } else if (userChoice == 2) {
