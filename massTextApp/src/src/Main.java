@@ -32,17 +32,17 @@ public class Main {
             // Check the password
             User foundUser = users.get(userIndex.get(username));
 
-            System.out.println(foundUser);
+            //System.out.println(foundUser);
 
-            System.out.println("Hello, " + foundUser.getUsername() + ".  Please enter your password:");
+            System.out.println("Please enter your password:");
 
             String password = input.nextLine();
             if (foundUser.getPassword().equals(password)) {
                 System.out.println("Access Granted");
                 int userChoice = 0;
 
-                System.out.println("Hello " + username + "What would you like to do? \n 1. Add/Remove/Display Contacts\n" +
-                        "2. Add/Remove/Display Messages\n 3. Send Message");
+                System.out.println("Hello " + username + ",\nWhat would you like to do? \n1. Add/Remove/Display Contacts\n" +
+                        "2. Add/Remove/Display Messages\n3. Send Message");
                 if (userChoice == 1) {
                     System.out.println("1. Add contact\n2. Remove contact\n3. Display contacts\n");
                     if (userChoice == 1) {
