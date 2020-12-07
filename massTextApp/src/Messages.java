@@ -1,4 +1,4 @@
-import String;
+import java.lang.String;
 
 public class Messages {
     private String message;
