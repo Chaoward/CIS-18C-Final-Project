@@ -13,7 +13,7 @@ public class Main {
         // Maps Username to User
         HashMap<String, Integer> userIndex = new HashMap();
         HashMap<String, Integer> passwordIndex = new HashMap();
-        users.add(new User("User","password", 45));
+        users.add(new User("User","password"));
 
         // Create index at the end
 
