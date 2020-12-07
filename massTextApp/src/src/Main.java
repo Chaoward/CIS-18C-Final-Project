@@ -41,14 +41,16 @@ public class Main {
                 if (foundUser.getPassword().equals(password)) {
                     System.out.println("------Access Granted------\n" +
                             "Hello " + username + " Welcome to the Mass Text Message Sender!");
-                    int userChoice = 0;
                     System.out.println("What would you like to do? \n" +
                             "1. Add/Remove/Display Contacts\n" +
                             "2. Add/Remove/Display Messages\n" +
                             "3. Send Message\n" +
                             "4. Log out");
+                    int userChoice = input.nextInt();
+
                     if (userChoice == 1) {
                         System.out.println("1. Add contact\n2. Remove contact\n3. Display all contacts\n");
+                        userChoice = input.nextInt();
                         if (userChoice == 1) {
                             System.out.println("Enter name:\n");
                             String name = input.next();
@@ -65,16 +67,12 @@ public class Main {
                             contactsManager.displayContacts();
                             System.out.println("Return to main ");
 
-                        } else if (userChoice == 4) {
-                            runLoop = 1;
-
                         } else {
                             System.out.println("Invalid option");
                             runLoop = 1;
                         }
 
-                    }
-                    else if (userChoice == 2) {
+                    } else if (userChoice == 2) {
                         if (userChoice == 1) {
                             System.out.println("1. Add message\n2. Remove message\n3. Display all message\n");
                             if (userChoice == 1) {
@@ -96,15 +94,17 @@ public class Main {
 
                         }
 
+                    } else if (userChoice == 4) {
+                        runLoop = 1;
                     } else {
-
+                        System.out.println("Access Denied");
+                        runLoop = 1;
                     }
-                }else {
-                    System.out.println("Access Denied");
-                    runLoop = 1;
                 }
             }
-        }while(runLoop == 1);
+
+        }while (runLoop == 1) ;
     }
 }
+
 
