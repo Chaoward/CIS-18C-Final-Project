@@ -1,5 +1,6 @@
 package src;
 //import com.twilio.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -9,39 +10,44 @@ public class Main {
     public static void main(String[] args) {
         ContactsManager contactsManager = new ContactsManager();
         Scanner input = new Scanner(System.in);
+
+        //==============Login================================
         ArrayList<User> users = new ArrayList();
-        // Maps Username to User
+        // Creates and maps Username to User
         HashMap<String, Integer> userIndex = new HashMap();
         HashMap<String, Integer> passwordIndex = new HashMap();
-        users.add(new User("user", "password"));
-        int runLoop = 1;
+        users.add(new User("u", "p"));
+        boolean runLoop = true;
+        boolean runLoop2 = true;
 
-        // Create index at the end
+        // the first run loop starts here for the login
         do {
+            // Create index at the end
             for (int i = 0; i < users.size(); i++) {
                 userIndex.put(users.get(i).getUsername(), i);
                 passwordIndex.put(users.get(i).getPassword(), i);
             }
 
-            System.out.println("Please log in.\nEnter your username:");
+            System.out.println("Please log in.\n" +
+                    "Enter your username:");
+
             String username = input.nextLine();
-            // if (foundUser == null) {
-            if (!(userIndex.containsKey(username))) {
-                System.out.println("Username not found");
 
+            System.out.println("Please enter your password:");
+
+            String password = input.nextLine();
+            // if (foundUser == null || password == null) check the username and password
+            User foundUser = users.get(userIndex.get(username));
+            if (!(userIndex.containsKey(username)) || !(foundUser.getPassword().equals(password))){
+                System.out.println("Login attempt failed user or password are incorrect");
+                //attempt counter here?
+                // If the password is correct move onto the User Interface loop.
             } else {
-                // Check the password
-                User foundUser = users.get(userIndex.get(username));
-
-                //System.out.println(foundUser);
-
-                System.out.println("Please enter your password:");
-
-                String password = input.nextLine();
-                if (foundUser.getPassword().equals(password)) {
-                    System.out.println("------Access Granted------\n" +
-                            "Hello " + username + " Welcome to the Mass Text Message Sender!");
-                    System.out.println("What would you like to do? \n" +
+                System.out.println("------Access Granted------\n");
+                do {
+                    System.out.println("Hello " + username +
+                            ", Welcome to the Mass Text Message Sender!\n" +
+                            "What would you like to do? \n" +
                             "1. Add/Remove/Display Contacts\n" +
                             "2. Add/Remove/Display Messages\n" +
                             "3. Send Message\n" +
@@ -62,6 +68,7 @@ public class Main {
                             System.out.println("Enter name of contact to be removed");
                             String name = input.next();
                             contactsManager.remove(name);
+                            return;
 
                         } else if (userChoice == 3) {
                             contactsManager.displayContacts();
@@ -69,10 +76,11 @@ public class Main {
 
                         } else {
                             System.out.println("Invalid option");
-                            runLoop = 1;
+                            runLoop = true;
                         }
 
-                    } else if (userChoice == 2) {
+                    }
+                    else if (userChoice == 2) {
                         if (userChoice == 1) {
                             System.out.println("1. Add message\n2. Remove message\n3. Display all message\n");
                             if (userChoice == 1) {
@@ -88,22 +96,21 @@ public class Main {
                                 System.out.println("Invalid option");
                                 return;
                             }
-
-
-                        } else if (userChoice == 3) {
-
                         }
-
-                    } else if (userChoice == 4) {
-                        runLoop = 1;
-                    } else {
-                        System.out.println("Access Denied");
-                        runLoop = 1;
                     }
-                }
+                    else if (userChoice == 3) {
+                        //run the message builder
+
+                    }
+                    else if (userChoice == 4) {
+                        runLoop2 = false;
+                        input.nextLine();
+                    }
+                } while(runLoop2 ==true);
+
             }
 
-        }while (runLoop == 1) ;
+        } while(runLoop == true);
     }
 }
 
