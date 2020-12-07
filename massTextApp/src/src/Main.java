@@ -13,7 +13,7 @@ public class Main {
         // Maps Username to User
         HashMap<String, Integer> userIndex = new HashMap();
         HashMap<String, Integer> passwordIndex = new HashMap();
-        users.add(new User("user","password"));
+        users.add(new User("user", "password"));
 
         // Create index at the end
 
@@ -39,17 +39,45 @@ public class Main {
             String password = input.nextLine();
             if (foundUser.getPassword().equals(password)) {
                 System.out.println("Access Granted");
-            int choice = 3;
-            String displayChoice;
+                int userChoice = 0;
 
-            switch (choice){
-                case 1: displayChoice = "Contacts";
-                case 2: displayChoice = "Messages";
-                case 3: displayChoice = "End program";
-            }
+                System.out.println("Hello " + username + "What would you like to do? \n 1. Add/Remove/Display Contacts\n" +
+                        "2. Add/Remove/Display Messages\n 3. Send Message");
+                if (userChoice == 1) {
+                    System.out.println("1. Add contact\n 2. Remove contact\n 3. Display contacts\n");
+                    if (userChoice == 1) {
 
-            } else {
-                System.out.println("Access Denied");
+                    } else if (userChoice == 2) {
+
+                    } else if (userChoice == 3) {
+
+                    } else {
+                        System.out.println("Invalid option");
+                        return;
+                    }
+
+                } else if (userChoice == 2) {
+                    if (userChoice == 1) {
+                        System.out.println("1. Add message\n 2. Remove message\n 3. Display message\n");
+                        if (userChoice == 1) {
+
+                        } else if (userChoice == 2) {
+
+                        } else if (userChoice == 3) {
+
+                        } else {
+                            System.out.println("Invalid option");
+                            return;
+                        }
+
+
+                    } else if (userChoice == 3) {
+
+                    }
+
+                } else {
+                    System.out.println("Access Denied");
+                }
             }
         }
     }
