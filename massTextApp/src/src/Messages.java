@@ -1,3 +1,5 @@
+package src;
+
 import java.lang.String;
 
 public class Messages {
@@ -64,7 +66,7 @@ public class Messages {
     //Change the dollar sign place holder for the name inputted
     private void nameInput() {
         if(itemExists(this.message) && itemExists(this.name)) {
-            this.message.replace('$', this.name);
+            this.message.replace("$", this.name);
         }
     }
 
