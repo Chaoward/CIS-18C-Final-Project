@@ -1,6 +1,8 @@
 package src;
 //import com.twilio.*;
 
+//NOTE: Why HashMaps pf password it's better just to have a collection of Users only
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -38,7 +40,7 @@ public class Main {
             String password = input.nextLine();
             // if (foundUser == null || password == null) check the username and password
             User foundUser = users.get(userIndex.get(username));
-            if (!(userIndex.containsKey(username)) || !(foundUser.getPassword().equals(password))){
+            if (!(userIndex.containsKey(username)) || !(foundUser.equals(password))){
                 System.out.println("Login attempt failed user or password are incorrect");
                 //attempt counter here?
                 // If the password is correct move onto the User Interface loop.

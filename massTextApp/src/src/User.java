@@ -17,6 +17,11 @@ public class User {
         this.username = username;
     }
 
+    public boolean equals(String input) {
+        return input == this.password;
+    }
+
+    //NOTE: this is dangerous to have here
     public String getPassword() {
         return this.password;
     }

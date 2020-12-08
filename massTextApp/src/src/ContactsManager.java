@@ -1,13 +1,23 @@
 package src;
 
 import java.io.*;
-import java.io.BufferedReader;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
-/***** ContactsManager **********
- *  */
+/***** ContactsManager **************************
+ * This class manages the current login user's contact
+ * list, and will save updated info into a file. The
+ * information is save by combining the username and
+ * the contact list as one string.
+ *
+ * File Name: contacts.txt
+ *
+ * Save File Format:
+ *      - ";" : splits between userName and contactList
+ *      - "~" : splits between pair of contact information
+ *      - "/" : splits between contactName and their phoneNumber
+ ************************************************/
 
 public class ContactsManager {
     private static final String FILE_PATH = "src\\src\\data\\contacts.txt";
@@ -24,22 +34,55 @@ public class ContactsManager {
 
     /////// Methods ////////////////////////////////////////////////
 
+    //===== getUserName ==============================
+    /** Returns the current contact list's UserName. */
+    //================================================
+    public String getUserName() {
+        return this.curUsername;
+    }
+
+
+    //===== getNumber ================================
+    /** Returns the phone number of the passed in name. */
+    //================================================
+    public Integer getNumber(String contactName) {
+        return this.contactList.get(contactName);
+    }
+
+
+    //===== getNumberStr ==========================
+    /** Returns the phone number of the passed in name
+     * as a String with general phone # format.
+     * If phone# is less than 10 digits return # as is. */
+    //================================================
+    public String getNumberStr(String userName) {
+        String num = this.contactList.get(userName).toString();
+        //if number is 10 or greater digits, use phone# format else return # as is
+        return num.length() >= 10 ?
+                "(" + num.substring(0, 2) + ")-" + num.substring(3, 5) + "-" + num.substring(6) :
+                num;
+    }
+
+
+
     //===== retrieve ==================================
     /** reads contacts.txt and retrieves the passed in
      * user's contact list as a single string. Splits the string
      * into pairs of name and number and store s them together in contactList */
     //=================================================
     public void retrieve(String username) {
-        this.contactList = new HashMap<>();
+        this.contactList = new HashMap<>(); //empties the current collection
         String[] data = {};
 
         try {
             reader = new BufferedReader(new FileReader(FILE_PATH));
             boolean userFound = false;
 
+            //searches for the passed in userName assigns line to data variable
             while (!userFound && reader.ready()) {
                 String[] curLine = reader.readLine().split(";");
                 if (curLine[0].equals(username)) {
+                    //
                     data = curLine[1].split("~");
                     this.curUsername = curLine[0];
                     userFound = true;
@@ -71,7 +114,7 @@ public class ContactsManager {
     //=========================================================
     public void displayContacts() {
         for (String name : this.contactList.keySet()) {
-            System.out.println(name + "  :  " + this.contactList.get(name));
+            System.out.println(name + "  :  " + getNumberStr(name));
         }
     }
     //===== *END* displayContacts *END* =======================
@@ -104,25 +147,33 @@ public class ContactsManager {
 
 
 
+    //===== save =============================================
+    /** updates save file with updated data. Reads each file line
+     * and stores it in memory but updates the current login data.
+     * Writes to file afterwards.*/
+    //========================================================
     public void save() {
         File contactsFile = new File((FILE_PATH));
         boolean saved = false;
-        String fileData = "";
+        ArrayList<String> fileData = new ArrayList<>(5);
 
+        //read and copy current data from the file
         try {
             reader = new BufferedReader(new FileReader(contactsFile));
-            String[] lineData;
+            String[] lineData; //array variable to split current reading line
 
-            while (reader.ready()) {
+            do {
                 lineData = reader.readLine().split(";");
+                //if current user's data, add updated data
+                //else add the current line
                 if (lineData[0].equals(this.curUsername)) {
-                    fileData += listToString() + "\n";
+                    fileData.add(listToString());
                     saved = true;
                 }
                 else {
-                    fileData += reader.readLine() + "~";
+                    fileData.add(lineData[0] + ";" + lineData[1]);
                 }
-            }
+            } while (reader.ready());
 
             reader.close();
         } catch (IOException e) {
@@ -130,29 +181,51 @@ public class ContactsManager {
             return;
         }
 
+        //if the updated data is not saved, add to the end of arrayList
         if (!saved) {
-            fileData += listToString();
+            fileData.add(listToString());
         }
 
+        //write updated data to the file
         try {
             writer = new PrintWriter(contactsFile);
-            writer.print(fileData);
+            //writes each array item as each line in file
+            for (String line: fileData) {
+                writer.println(line);
+            }
             writer.flush();
         } catch (FileNotFoundException e) {
             System.out.println(e.toString());
         }
     }
+    //===== *END* save *END* =================================
+
+
+    //===== logOut ===========================================
+    /** saves and empties the current contactList and userName. */
+    //========================================================
+    public void logOut() {
+        save();
+        this.contactList = new HashMap<>();
+        this.curUsername = "";
+    }
+    //===== *END* logOut *END* ===============================
 
 
 
+    //==== listToString ======================================
+    /** Returns the current hashmap data as a singular String.
+     * Format: [userName] ; [contactName / phoneNumber] ~ [contactName / phoneNumber] ...
+     * N0 whitespace except for any names with them. */
+    //========================================================
     private String listToString() {
         String updatedLine = this.curUsername + ";";
         for (String name : this.contactList.keySet()) {
             updatedLine += name + "/" + this.contactList.get(name).toString() + "~";
         }
-        updatedLine += "n";
-        updatedLine = updatedLine.replace("~n", "");
+        updatedLine += "`";
 
-        return updatedLine;
+        return updatedLine.replace("~`", "");
     }
+    //===== *END* listToString *END* ========================
 }
