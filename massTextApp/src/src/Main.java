@@ -3,9 +3,12 @@ package src;
 
 //NOTE: Why HashMaps pf password it's better just to have a collection of Users only
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Vector;
+
 /***** MASS TEXT MESSAGE SENDER ******************
  * This program will take message template or a user
  * written message then take the users contacts and
@@ -16,15 +19,18 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+//        final String FILE_PATH = "src\\src\\data\\messages.txt";
+//        try (FileWriter writer = new FileWriter("src\\src\\data\\messages.txt")) {
+//        }
+        Vector<MessageManager> MessageVec = new Vector<MessageManager>();
 
         ContactsManager contactsManager = new ContactsManager();
         Scanner input = new Scanner(System.in);
-
-        /***** Login *************************************
-         *  THe login will be handled by an unordered
-         *  collection (hashmap)
-         ************************************************/
+        //===== getUserName ==============================
+        //  THe login will be handled by an unordered
+        // collection (hashmap)
+        //================================================
         ArrayList<User> users = new ArrayList();
         // Creates and maps Username to User
         HashMap<String, Integer> userIndex = new HashMap();
@@ -97,7 +103,10 @@ public class Main {
                         if (userChoice == 1) {
                             System.out.println("1. Add message\n2. Remove message\n3. Display all message\n");
                             if (userChoice == 1) {
-                                //add a message to the messageManager
+                                System.out.println("Message ID:\n");
+                                //
+                                System.out.println("Enter your message here and place an \"`\" for the name placement.\n");
+
 
                             } else if (userChoice == 2) {
                                 // delete a message from the messageManager
