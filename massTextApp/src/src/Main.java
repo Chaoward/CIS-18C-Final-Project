@@ -6,14 +6,25 @@ package src;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+/***** MASS TEXT MESSAGE SENDER ******************
+ * This program will take message template or a user
+ * written message then take the users contacts and
+ * send a personalized message to each contact using
+ * the selected message.
+ ************************************************/
+
 
 public class Main {
 
     public static void main(String[] args) {
+
         ContactsManager contactsManager = new ContactsManager();
         Scanner input = new Scanner(System.in);
 
-        //==============Login================================
+        /***** Login *************************************
+         *  THe login will be handled by an unordered
+         *  collection (hashmap)
+         ************************************************/
         ArrayList<User> users = new ArrayList();
         // Creates and maps Username to User
         HashMap<String, Integer> userIndex = new HashMap();
@@ -22,7 +33,7 @@ public class Main {
         boolean runLoop = true;
         boolean runLoop2 = true;
 
-        // the first run loop starts here for the login
+        // the first do while run loop starts here for the login
         do {
             // Create index at the end
             for (int i = 0; i < users.size(); i++) {
@@ -40,7 +51,7 @@ public class Main {
             String password = input.nextLine();
             // if (foundUser == null || password == null) check the username and password
             User foundUser = users.get(userIndex.get(username));
-            if (!(userIndex.containsKey(username)) || !(foundUser.equals(password))){
+            if (!(userIndex.containsKey(username)) || !(foundUser.getPassword().equals(password))){
                 System.out.println("Login attempt failed user or password are incorrect");
                 //attempt counter here?
                 // If the password is correct move onto the User Interface loop.
