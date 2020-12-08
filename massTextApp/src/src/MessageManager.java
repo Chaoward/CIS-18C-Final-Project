@@ -1,13 +1,13 @@
 package src;
 
 public class MessageManager {
-    private int id;
+    private String msgName;
     private String message;
 
     MessageManager(){ }
 
-    public void setId (int id){
-        this.id =  id;
+    public void setMsgName (String msgName){
+        this.msgName =  msgName;
     }
 
     public void setMessage (String message){
@@ -15,7 +15,12 @@ public class MessageManager {
     }
 
     public void display ( ){
-        System.out.println(id +". " + message);
+        System.out.println(msgName +"\n" + message);
+    }
+
+    public String toString()
+    {
+        return (msgName +"\n" + message + "\n");
     }
 
 }

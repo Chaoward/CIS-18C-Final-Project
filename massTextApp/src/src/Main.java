@@ -3,7 +3,7 @@ package src;
 
 //NOTE: Why HashMaps pf password it's better just to have a collection of Users only
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -63,6 +63,28 @@ public class Main {
                 // If the password is correct move onto the User Interface loop.
             } else {
                 System.out.println("------Access Granted------\n");
+
+                //If user logged in read all messaged that are saved to file
+                MessageManager tmp = new MessageManager();
+                try (BufferedReader br = new BufferedReader(
+                        new FileReader("messages.txt")))
+                {
+                    String sCurrentLine;
+                    while ((sCurrentLine = br.readLine()) != null)
+                    {
+                        //tmp.setMsgName(sCurrentLine);
+                        //sCurrentLine = br.readLine();
+                        //tmp.setMessage(sCurrentLine);
+                        System.out.println(sCurrentLine);
+                        //MessageVec.add(tmp);
+                    }
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+
+                System.out.println("");
                 do {
                     System.out.println("Hello " + username +
                             ", Welcome to the Mass Text Message Sender!\n" +
@@ -100,26 +122,61 @@ public class Main {
 
                     }
                     else if (userChoice == 2) {
+
+                        System.out.println("1. Add message\n2. Remove message\n3. Display all message\n");
+                        userChoice = input.nextInt();
                         if (userChoice == 1) {
-                            System.out.println("1. Add message\n2. Remove message\n3. Display all message\n");
-                            if (userChoice == 1) {
-                                System.out.println("Message ID:\n");
-                                //
+                           if (userChoice == 1) {
+                                String userInput;
+                                MessageManager tmp2 = new MessageManager();
+                                input.nextLine();
+                                System.out.println("Message Name:\n");
+                                //get user input
+                                userInput = input.nextLine();
+                                tmp2.setMsgName(userInput);
+
                                 System.out.println("Enter your message here and place an \"`\" for the name placement.\n");
+                                //get user msg
+                                userInput = input.nextLine();
+                                tmp2.setMessage(userInput);
+
+                                MessageVec.add(tmp2);
+
+                                //-------------------
+                                try {
+                                    //String content = "";
+                                    File file = new File("messages.txt");
+                                    if (!file.exists()) {
+                                        file.createNewFile();
+                                    }
+                                    FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
+                                    BufferedWriter bw = new BufferedWriter(fw);
+
+                                    bw.write(tmp.toString());
+
+                                    bw.close();
+
+                                    System.out.println("Done");
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
 
 
-                            } else if (userChoice == 2) {
-                                // delete a message from the messageManager
-
-                            } else if (userChoice == 3) {
-                                //display all the current messages
-
-                            } else {
-                                System.out.println("Invalid option");
-                                return;
                             }
+
+
+                        } else if (userChoice == 2) {
+                            // delete a message from the messageManager
+
+                        } else if (userChoice == 3) {
+                            //display all the current messages
+
+                        } else {
+                            System.out.println("Invalid option");
+                            return;
                         }
                     }
+
                     else if (userChoice == 3) {
                         //run the message builder
 
