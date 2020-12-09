@@ -3,11 +3,10 @@ package src;
 
 //NOTE: Why HashMaps pf password it's better just to have a collection of Users only
 
-import java.io.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.Vector;
 
 /***** MASS TEXT MESSAGE SENDER ******************
  * This program will take message template or a user
@@ -23,9 +22,9 @@ public class Main {
 //        final String FILE_PATH = "src\\src\\data\\messages.txt";
 //        try (FileWriter writer = new FileWriter("src\\src\\data\\messages.txt")) {
 //        }
-        Vector<MessageManager> MessageVec = new Vector<MessageManager>();
-
+        MessageManager MessageManager = new MessageManager();
         ContactsManager contactsManager = new ContactsManager();
+
         Scanner input = new Scanner(System.in);
         //===== getUserName ==============================
         //  THe login will be handled by an unordered
@@ -57,34 +56,15 @@ public class Main {
             String password = input.nextLine();
             // if (foundUser == null || password == null) check the username and password
             User foundUser = users.get(userIndex.get(username));
-            if (!(userIndex.containsKey(username)) || !(foundUser.equals(password))){
+            if (!(userIndex.containsKey(username)) || !(foundUser.equals(password))) {
                 System.out.println("Login attempt failed user or password are incorrect");
                 //attempt counter here?
                 // If the password is correct move onto the User Interface loop.
             } else {
                 System.out.println("------Access Granted------\n");
-
+                contactsManager.retrieve("u");
                 //If user logged in read all messaged that are saved to file
-                MessageManager tmp = new MessageManager();
-                try (BufferedReader br = new BufferedReader(
-                        new FileReader("messages.txt")))
-                {
-                    String sCurrentLine;
-                    while ((sCurrentLine = br.readLine()) != null)
-                    {
-                        //tmp.setMsgName(sCurrentLine);
-                        //sCurrentLine = br.readLine();
-                        //tmp.setMessage(sCurrentLine);
-                        System.out.println(sCurrentLine);
-                        //MessageVec.add(tmp);
-                    }
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
 
-                System.out.println("");
                 do {
                     System.out.println("Hello " + username +
                             ", Welcome to the Mass Text Message Sender!\n" +
@@ -120,48 +100,18 @@ public class Main {
                             runLoop = true;
                         }
 
-                    }
-                    else if (userChoice == 2) {
+                    } else if (userChoice == 2) {
 
                         System.out.println("1. Add message\n2. Remove message\n3. Display all message\n");
                         userChoice = input.nextInt();
                         if (userChoice == 1) {
-                           if (userChoice == 1) {
+                            if (userChoice == 1) {
                                 String userInput;
-                                MessageManager tmp2 = new MessageManager();
                                 input.nextLine();
                                 System.out.println("Message Name:\n");
                                 //get user input
-                                userInput = input.nextLine();
-                                tmp2.setMsgName(userInput);
-
                                 System.out.println("Enter your message here and place an \"`\" for the name placement.\n");
                                 //get user msg
-                                userInput = input.nextLine();
-                                tmp2.setMessage(userInput);
-
-                                MessageVec.add(tmp2);
-
-                                //-------------------
-                                try {
-                                    //String content = "";
-                                    File file = new File("messages.txt");
-                                    if (!file.exists()) {
-                                        file.createNewFile();
-                                    }
-                                    FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
-                                    BufferedWriter bw = new BufferedWriter(fw);
-
-                                    bw.write(tmp.toString());
-
-                                    bw.close();
-
-                                    System.out.println("Done");
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-
-
                             }
 
 
@@ -175,21 +125,19 @@ public class Main {
                             System.out.println("Invalid option");
                             return;
                         }
-                    }
-
-                    else if (userChoice == 3) {
+                    } else if (userChoice == 3) {
                         //run the message builder
 
-                    }
-                    else if (userChoice == 4) {
+                    } else if (userChoice == 4) {
+                         contactsManager.logOut();
                         runLoop2 = false;
                         input.nextLine();
                     }
-                } while(runLoop2 ==true);
+                } while (runLoop2 == true);
 
             }
 
-        } while(runLoop == true);
+        } while (runLoop == true);
     }
 }
 
