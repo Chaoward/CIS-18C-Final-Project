@@ -26,7 +26,7 @@ public class Messages {
         this.name = "";
     }
 
-    
+
     //////// New included getter functions //////////////
     public String getContent() {
         return this.message;

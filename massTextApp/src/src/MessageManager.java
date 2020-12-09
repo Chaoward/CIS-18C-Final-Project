@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class MessageManager {
-    private static final String FOLDER_PATH = "src\\main\\data\\messages\\";
+    private static final String FOLDER_PATH = "src\\src\\data\\messages\\";
     private ArrayList<Messages> messageList;
     private String curUsername;
     private static BufferedReader reader;
