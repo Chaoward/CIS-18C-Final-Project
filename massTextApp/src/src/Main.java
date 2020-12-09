@@ -20,6 +20,7 @@ import java.util.Scanner;
 public class Main {
     private static final String USER_FILE_PATH =  "src\\src\\data\\users.txt";
     private static ArrayList<User> users = new ArrayList();
+    public static
 
     public static void main(String[] args) throws IOException {
 //        final String FILE_PATH = "src\\src\\data\\messages.txt";

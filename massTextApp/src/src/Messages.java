@@ -19,6 +19,7 @@ public class Messages {
         this.title = "";
         this.name = "";
     }
+
     //Empty to allow instantiation without needing to initialized
     Messages() {
         this.message = "";
