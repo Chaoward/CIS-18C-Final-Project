@@ -1,3 +1,5 @@
+package src;
+
 import java.lang.String;
 
 public class Messages {
@@ -6,12 +8,9 @@ public class Messages {
     private String name;
 
     //Constructor, sets title, message, and name to be used in one step
-    Messages (String m, String t, String n) {
+    Messages (String m, String t) {
         this.message = m;
         this.title = t;
-        this.name = n;
-        //Change the place holder into the name
-        this.nameInput();
     }
 
     //Only requires the message to be input
@@ -21,11 +20,24 @@ public class Messages {
         this.name = "";
     }
     //Empty to allow instantiation without needing to initialized
-    Messages (){
+    Messages() {
         this.message = "";
         this.title = "";
         this.name = "";
     }
+
+
+    //////// New included getter functions //////////////
+    public String getContent() {
+        return this.message;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+    //////////////////////////////////////////////////////
+
+
 
     //set message that will be used
     void setMessage(String m) {
@@ -64,7 +76,7 @@ public class Messages {
     //Change the dollar sign place holder for the name inputted
     private void nameInput() {
         if(itemExists(this.message) && itemExists(this.name)) {
-            this.message.replace("$", this.name);
+            this.message.replace("`", this.name);
         }
     }
 
