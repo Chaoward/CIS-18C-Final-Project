@@ -205,6 +205,7 @@ public class ContactsManager {
     /** saves and empties the current contactList and userName. */
     //========================================================
     public void logOut() {
+        if (this.curUsername == "") return;
         save();
         this.contactList = new HashMap<>();
         this.curUsername = "";
@@ -225,7 +226,7 @@ public class ContactsManager {
         }
         updatedLine += "`";
 
-        return updatedLine.replace("~`", "");
+        return updatedLine.replace("~`", ""); //removes the last "~"
     }
     //===== *END* listToString *END* ========================
 }
