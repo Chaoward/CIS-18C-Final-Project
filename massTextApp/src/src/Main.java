@@ -3,10 +3,10 @@ package src;
 
 //NOTE: Why HashMaps pf password it's better just to have a collection of Users only
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 /***** MASS TEXT MESSAGE SENDER ******************
@@ -18,7 +18,7 @@ import java.util.Scanner;
 
 
 public class Main {
-    private static final String USER_FILE_PATH =  "src\\src\\data\\users.txt";
+    private static final String USER_FILE_PATH = "src\\src\\data\\users.txt";
     private static ArrayList<User> users = new ArrayList();
 
     public static void main(String[] args) throws IOException {
