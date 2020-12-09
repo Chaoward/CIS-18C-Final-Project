@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 /***** MASS TEXT MESSAGE SENDER ******************
  * This program will take message template or a user
- * written message then take the users contacts and
+ * written message then take the users contacts.txt and
  * send a personalized message to each contact using
  * the selected message.
  ************************************************/
@@ -76,18 +76,19 @@ public class Main {
                     int userChoice = input.nextInt();
 
                     if (userChoice == 1) {
-                        System.out.println("1. Add contact\n2. Remove contact\n3. Display all contacts\n");
+                        System.out.println("1. Add contact\n2. Remove contact\n3. Display all contacts.txt\n");
                         userChoice = input.nextInt();
                         if (userChoice == 1) {
                             System.out.println("Enter name:\n");
-                            String name = input.next();
+                            input.nextLine();
+                            String name = input.nextLine();
                             System.out.println("Enter phone number:\n");
                             Integer number = input.nextInt();
                             contactsManager.add(name, number);
 
                         } else if (userChoice == 2) {
                             System.out.println("Enter name of contact to be removed");
-                            String name = input.next();
+                            String name = input.nextLine();
                             contactsManager.remove(name);
                             return;
 
@@ -117,9 +118,12 @@ public class Main {
 
                         } else if (userChoice == 2) {
                             // delete a message from the messageManager
+                            System.out.println("What message would you like to delete?\n");
+
 
                         } else if (userChoice == 3) {
                             //display all the current messages
+                            System.out.println("Here is your saved messages.\n");
 
                         } else {
                             System.out.println("Invalid option");

@@ -14,7 +14,7 @@ import java.util.HashMap;
  * IMPORTANT: INSTANCE OBJ MUST CALL retrieve() TO
  *          READ/EDIT THE USERS DATABASE!!!
  *
- * File Name: contacts.txt
+ * File Name: contacts.txt.txt
  *
  * Save File Format:
  *      - ";" : splits between userName and contactList
@@ -23,7 +23,7 @@ import java.util.HashMap;
  ************************************************/
 
 public class ContactsManager {
-    private static final String FILE_PATH = "src\\src\\data\\contacts.txt";
+    private static final String FILE_PATH = "src\\src\\data\\contacts.txt.txt";
     private HashMap<String, Integer> contactList;
     private String curUsername;
     private static BufferedReader reader;
@@ -69,7 +69,7 @@ public class ContactsManager {
 
 
     //===== retrieve ==================================
-    /** reads contacts.txt and retrieves the passed in
+    /** reads contacts.txt.txt and retrieves the passed in
      * user's contact list as a single string. Splits the string
      * into pairs of name and number and store s them together in contactList */
     //=================================================
