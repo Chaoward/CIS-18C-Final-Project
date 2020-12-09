@@ -68,6 +68,10 @@ public class Messages {
         }
     }
 
+    void display (){
+        System.out.println(this.message);
+    }
+
     //Erases all data from the object, sets to NULL
     void erase () {
         this.message = "";
