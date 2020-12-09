@@ -11,6 +11,9 @@ import java.util.HashMap;
  * information is save by combining the username and
  * the contact list as one string.
  *
+ * IMPORTANT: INSTANCE OBJ MUST CALL retrieve() TO
+ *          READ/EDIT THE USERS DATABASE!!!
+ *
  * File Name: contacts.txt
  *
  * Save File Format:
