@@ -17,7 +17,7 @@ public class User {
         this.username = username;
     }
 
-    public boolean equals(String input) {
+    public boolean passwordEquals(String input) {
         return input.equals(this.password);
     }
 

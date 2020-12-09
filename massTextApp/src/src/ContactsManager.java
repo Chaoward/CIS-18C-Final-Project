@@ -23,7 +23,7 @@ import java.util.HashMap;
  ************************************************/
 
 public class ContactsManager {
-    private static final String FILE_PATH = "src\\src\\data\\contacts.txt.txt";
+    private static final String FILE_PATH = "src\\src\\data\\contacts.txt";
     private HashMap<String, Integer> contactList;
     private String curUsername;
     private static BufferedReader reader;
@@ -31,6 +31,7 @@ public class ContactsManager {
 
     ContactsManager() {
         this.contactList = new HashMap<>();
+        this.curUsername = "";
     }
 
 
@@ -100,7 +101,7 @@ public class ContactsManager {
             String[] splitPair;
             for (String pair : data) {
                 splitPair = pair.split("/");
-                this.contactList.put(splitPair[0], new Integer(splitPair[1].trim()));
+                this.contactList.put(splitPair[0], Integer.parseInt(splitPair[1].trim()));
             }
             reader.close();
         } catch (IOException e) {

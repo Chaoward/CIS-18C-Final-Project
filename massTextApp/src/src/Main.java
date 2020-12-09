@@ -3,6 +3,7 @@ package src;
 
 //NOTE: Why HashMaps pf password it's better just to have a collection of Users only
 
+import java.io.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,12 +18,14 @@ import java.util.Scanner;
 
 
 public class Main {
+    private static final String USER_FILE_PATH =  "src\\src\\data\\users.txt";
+    private static ArrayList<User> users = new ArrayList();
 
     public static void main(String[] args) throws IOException {
 //        final String FILE_PATH = "src\\src\\data\\messages.txt";
 //        try (FileWriter writer = new FileWriter("src\\src\\data\\messages.txt")) {
 //        }
-        MessageManager MessageManager = new MessageManager();
+        MessageManager messageManager = new MessageManager();
         ContactsManager contactsManager = new ContactsManager();
 
         Scanner input = new Scanner(System.in);
@@ -30,21 +33,14 @@ public class Main {
         //  THe login will be handled by an unordered
         // collection (hashmap)
         //================================================
-        ArrayList<User> users = new ArrayList();
         // Creates and maps Username to User
-        HashMap<String, Integer> userIndex = new HashMap();
-        HashMap<String, Integer> passwordIndex = new HashMap();
         users.add(new User("u", "p"));
         boolean runLoop = true;
         boolean runLoop2 = true;
 
         // the first do while run loop starts here for the login
         do {
-            // Create index at the end
-            for (int i = 0; i < users.size(); i++) {
-                userIndex.put(users.get(i).getUsername(), i);
-                passwordIndex.put(users.get(i).getPassword(), i);
-            }
+            readUsers();
 
             System.out.println("Please log in.\n" +
                     "Enter your username:");
@@ -55,14 +51,25 @@ public class Main {
 
             String password = input.nextLine();
             // if (foundUser == null || password == null) check the username and password
-            User foundUser = users.get(userIndex.get(username));
-            if (!(userIndex.containsKey(username)) || !(foundUser.equals(password))) {
+            boolean searching = true;
+            User foundUser = null;
+            //searches through all users to match inputted values
+            for (int i = 0; searching && i < users.size(); ++i) {
+                if (users.get(i).getUsername().equals(username)) {
+                    foundUser = users.get(i);
+                    searching = false;
+                }
+            }
+
+            if (foundUser == null || !foundUser.passwordEquals(password)) {
                 System.out.println("Login attempt failed user or password are incorrect");
                 //attempt counter here?
                 // If the password is correct move onto the User Interface loop.
             } else {
                 System.out.println("------Access Granted------\n");
-                contactsManager.retrieve("u");
+                contactsManager.retrieve(foundUser.getUsername());
+                messageManager.retrieve(foundUser.getUsername());
+
                 //If user logged in read all messaged that are saved to file
 
                 do {
@@ -83,7 +90,7 @@ public class Main {
                             input.nextLine();
                             String name = input.nextLine();
                             System.out.println("Enter phone number:\n");
-                            Integer number = input.nextInt();
+                            Integer number = new Integer(input.nextLine());
                             contactsManager.add(name, number);
 
                         } else if (userChoice == 2) {
@@ -133,16 +140,35 @@ public class Main {
                         //run the message builder
 
                     } else if (userChoice == 4) {
-                         contactsManager.logOut();
                         runLoop2 = false;
                         input.nextLine();
                     }
                 } while (runLoop2 == true);
 
+                contactsManager.logOut();
+                messageManager.logOut();
             }
 
         } while (runLoop == true);
     }
+
+
+    public static void readUsers() {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(USER_FILE_PATH));
+            String[] lineData;
+
+            while (reader.ready()) {
+                lineData = reader.readLine().split("~");
+                users.add(new User(lineData[0], lineData[1]));
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+    }
+
 }
 
 
