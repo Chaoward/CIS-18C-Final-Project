@@ -18,7 +18,7 @@ public class User {
     }
 
     public boolean equals(String input) {
-        return input == this.password;
+        return input.equals(this.password);
     }
 
     //NOTE: this is dangerous to have here
