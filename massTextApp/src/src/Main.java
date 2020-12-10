@@ -33,8 +33,8 @@ public class Main {
         //  THe login will be handled by an unordered
         // collection (hashmap)
         //================================================
-        // Creates and maps Username to User
-        users.add(new User("u", "p"));
+        // Will we implement username creation?
+
         boolean runLoop = true;
         boolean runLoop2 = true;
 
@@ -44,6 +44,7 @@ public class Main {
             //Get Username and Password from user
             String username = getUserOrPasswordI("username");
             String password = getUserOrPasswordI("password");
+            int userChoice;
             // if (foundUser == null || password == null) check the username and password
             //
             User foundUser = linearUserSearch(username, password);
@@ -61,76 +62,27 @@ public class Main {
 
                 do {
                     //Display message menu and get choice
-                    int userChoice = menuInput(username,"message menu");
+                    userChoice = menuInput(username);
                     //Examine input
                     if (userChoice == 1) {
                         //Display contact menu and get choice
-                        userChoice = menuInput(username, "contact menu");
-                        if (userChoice == 1) {
-                            System.out.println("Enter name:\n");
-                            input.nextLine();
-                            String name = input.nextLine();
-                            System.out.println("Enter phone number:\n");
-                            Integer number = new Integer(input.nextLine());
-                            contactsManager.add(name, number);
-
-                        } else if (userChoice == 2) {
-                            System.out.println("Enter name of contact to be removed");
-                            String name = input.nextLine();
-                            contactsManager.remove(name);
-                            return;
-
-                        } else if (userChoice == 3) {
-                            contactsManager.displayContacts();
-                            System.out.println("Return to main ");
-
-                        } else {
-                            System.out.println("Invalid option");
-                            runLoop = true;
-                        }
-
+                        //userChoice = menuInput(username, "contact menu");
+                        contactsMenu(contactsManager, userChoice);
                     } else if (userChoice == 2) {
-
-                        System.out.println("1. Add message\n2. Remove message\n3. Display all message\n");
-                        userChoice = input.nextInt();
-                        if (userChoice == 1) {
-                            if (userChoice == 1) {
-                                String userInput;
-                                input.nextLine();
-                                System.out.println("Message Name:\n");
-                                //get user input
-                                System.out.println("Enter your message here and place an \"`\" for the name placement.\n");
-                                //get user msg
-                            }
-
-
-                        } else if (userChoice == 2) {
-                            // delete a message from the messageManager
-                            System.out.println("What message would you like to delete?\n");
-
-
-                        } else if (userChoice == 3) {
-                            //display all the current messages
-                            System.out.println("Here is your saved messages.\n");
-
-                        } else {
-                            System.out.println("Invalid option");
-                            return;
-                        }
+                        messageMenu(contactsManager, userChoice);
                     } else if (userChoice == 3) {
-                        //run the message builder
-
+                        messageBuilder(contactsManager, userChoice);
                     } else if (userChoice == 4) {
-                        runLoop2 = false;
+                        runLoop = false;
                         input.nextLine();
+                    } else if (userChoice == 5) {
+                        System.exit(0);
                     }
-                } while (runLoop2 == true);
-
-                contactsManager.logOut();
-                messageManager.logOut();
+                } while (runLoop == true);
             }
 
-        } while (runLoop == true);
+        } while (runLoop2 == true);
+
     }
 
 
@@ -150,42 +102,43 @@ public class Main {
         }
     }
     //===== getUserOrPassword =============================================
-    /** Utilizes input to either display text that asks for a password or
+
+    /**
+     * Utilizes input to either display text that asks for a password or
      * username, then stores them, or displays a message explaining t
      * he argument was invalid if it was
      * Returns -> String that contains a password or username,
-     * based on the argument, or an empty string*/
+     * based on the argument, or an empty string
+     */
     //========================================================
     public static String getUserOrPasswordI(String q) {
         //Variable to hold the username or password entered
         String temp;
         //Check contents of q
-        if(q == "username")
-        {
+        if (q == "username") {
             //Get Username
             System.out.println("Please log in.\n" +
                     "Enter your username:");
             temp = input.nextLine();
-        }
-        else if (q = "password")
-        {
+        } else if (q == "password") {
             //Get Password
             System.out.println("Please enter your password:");
             temp = input.nextLine();
-        }
-        else
-        {
+        } else {
             System.out.println("Invalid Argument");
             temp = "";
         }
         return temp;
     }
     //===== linearUserSearch =============================================
-    /** Uses linear search to find a username that matches that
+
+    /**
+     * Uses linear search to find a username that matches that
      * which was inputted.
-     * Returns -> User object with information matching the username's */
+     * Returns -> User object with information matching the username's
+     */
     //========================================================
-    public static User linearUserSearch(String u, String p){
+    public static User linearUserSearch(String u, String p) {
         boolean searching = true;
         User temp = null;
         //searches through all users to match inputted values
@@ -198,34 +151,95 @@ public class Main {
         return temp;
     }
     //===== messageMenu =============================================
-    /** Displays possible actions and the inputs required to access the
+
+    /**
+     * Displays possible actions and the inputs required to access the
      * functions for multiple menus
-     *
+     * <p>
      * Parameters:
      * u    = username
      * type = type of menu required
-     *
-     * Returns -> Integer representing menu option */
+     * <p>
+     * Returns -> Integer representing menu option
+     */
     //========================================================
-    public static int menuInput(String u, String type) {
-        if(type = "message menu") {
-            //Display message action menu
-            System.out.println("Hello " + u +
-                    ", Welcome to the Mass Text Message Sender!\n" +
-                    "What would you like to do? \n" +
-                    "1. Add/Remove/Display Contacts\n" +
-                    "2. Add/Remove/Display Messages\n" +
-                    "3. Send Message\n" +
-                    "4. Log out\n");
-        }
-        else if(type = "contact menu") {
-            System.out.println("1. Add contact\n2. Remove contact\n3. Display all contacts.txt\n");
-        }
-        else {
-            System.out.print("Invalid Argument");
-        }
+    public static int menuInput(String u) {
+        //Display message action menu
+        System.out.println("Hello " + u +
+                ", Welcome to the Mass Text Message Sender!\n" +
+                "What would you like to do? \n" +
+                "1. Add/Remove/Display Contacts\n" +
+                "2. Add/Remove/Display Messages\n" +
+                "3. Send Message\n" +
+                "4. Log out\n" +
+                "5. Exit Program");
+
         //Return input
         return input.nextInt();
+    }
+
+    public static void contactsMenu(ContactsManager contactsManager, int userChoice) {
+        System.out.println("1. Add Contact\n2. Remove Contact\n3. Display all Contacts\n 4. Return to Main Menu");
+        userChoice = input.nextInt();
+        if (userChoice == 1) {
+            System.out.println("Enter name:\n");
+            input.nextLine();
+            String name = input.nextLine();
+            System.out.println("Enter phone number:\n");
+            Integer number = new Integer(input.nextLine());
+            contactsManager.add(name, number);
+        } else if (userChoice == 2) {
+            System.out.println("Enter name of contact to be removed");
+            String name = input.nextLine();
+            contactsManager.remove(name);
+
+        } else if (userChoice == 3) {
+            contactsManager.displayContacts();
+            System.out.println("Return to main ");
+
+        } else {
+            System.out.println("Invalid option");
+        }
+    }
+
+    private static void messageMenu(ContactsManager contactsManager, int userChoice) {
+
+
+        System.out.println("1. Add message\n2. Remove message\n3. Display all message\n 4. Return to Main Menu");
+        userChoice = input.nextInt();
+        if (userChoice == 1) {
+            if (userChoice == 1) {
+                String userInput;
+                input.nextLine();
+                System.out.println("Message Name:\n");
+                //get user input
+                System.out.println("Enter your message here and place an \"`\" for the name placement.\n");
+                //get user msg
+            }
+
+
+        } else if (userChoice == 2) {
+            // delete a message from the messageManager
+            System.out.println("What message would you like to delete?\n");
+
+
+        } else if (userChoice == 3) {
+            //display all the current messages
+            System.out.println("Here is your saved messages.\n");
+
+        } else if (userChoice == 4) {
+            return;
+        } else {
+            System.out.println("Invalid option");
+            return;
+        }
+
+    }
+
+    private static void messageBuilder(ContactsManager contactsManager, int userChoice) {
+        if (userChoice == 3) {
+            //run the message builder
+        }
     }
 }
 
