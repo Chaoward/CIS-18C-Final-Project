@@ -68,7 +68,10 @@ public class Messages {
         //Set boolean variable, initialized
         boolean exists = false;
         //Validate existence
-        if(item == ""){
+        if(item != ""){
+            exists = true;
+        }
+        else {
             exists = false;
         }
         return exists;
