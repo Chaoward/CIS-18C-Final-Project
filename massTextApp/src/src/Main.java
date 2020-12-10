@@ -69,7 +69,7 @@ public class Main {
                         //userChoice = menuInput(username, "contact menu");
                         contactsMenu(contactsManager, userChoice);
                     } else if (userChoice == 2) {
-                        messageMenu(contactsManager, userChoice);
+                        messageMenu(messageManager, userChoice);
                     } else if (userChoice == 3) {
                         messageBuilder(contactsManager, userChoice);
                     } else if (userChoice == 4) {
@@ -177,7 +177,16 @@ public class Main {
         //Return input
         return input.nextInt();
     }
+    //===== messageMenu =============================================
 
+    /**
+     * Displays possible actions and the inputs required to access the
+     * functions for contactsMenu
+     * Parameters:
+     * ContactsManager contactsManager
+     * int userChoice
+     */
+    //================================================================
     public static void contactsMenu(ContactsManager contactsManager, int userChoice) {
         System.out.println("1. Add Contact\n2. Remove Contact\n3. Display all Contacts\n 4. Return to Main Menu");
         userChoice = input.nextInt();
@@ -201,8 +210,17 @@ public class Main {
             System.out.println("Invalid option");
         }
     }
+//===== contactsMenu =============================================
 
-    private static void messageMenu(ContactsManager contactsManager, int userChoice) {
+    /**
+     * Displays possible actions and the inputs required to access the
+     * functions for MessageMenu
+     * Parameters:
+     * MessageManager messageManager
+     * int userChoice
+     */
+    //================================================================
+    private static void messageMenu(MessageManager messageManager, int userChoice) {
 
 
         System.out.println("1. Add message\n2. Remove message\n3. Display all message\n 4. Return to Main Menu");
