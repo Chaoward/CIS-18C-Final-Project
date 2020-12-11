@@ -250,11 +250,6 @@ public class Main {
             //display all the current messages
             System.out.println("Here is your saved messages.\n");
 
-        } else if (userChoice == 4) {
-            return;
-        } else {
-            System.out.println("Invalid option");
-            return;
         }
 
     }
