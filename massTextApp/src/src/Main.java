@@ -1,7 +1,7 @@
 package src;
 //import com.twilio.*;
 
-//NOTE: Why HashMaps pf password it's better just to have a collection of Users only
+/** Try catch for input validation?**/
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -191,28 +191,36 @@ public class Main {
      */
     //================================================================
     public static void contactsMenu(ContactsManager contactsManager, int userChoice) {
+
         System.out.println("1. Add Contact\n2. Remove Contact\n3. Display all Contacts\n4. Return to Main Menu");
         userChoice = input.nextInt();
         if (userChoice == 1) {
-            System.out.println("Enter name:\n");
-            input.nextLine();
-            String name = input.nextLine();
-            System.out.println("Enter phone number:\n");
-            String number = new String(input.nextLine());
-            contactsManager.add(name, number);
+            do {
+                System.out.println("Enter name:\n");
+                input.nextLine();
+                String name = input.nextLine();
+                System.out.println("Enter phone number:\n");
+                String number = new String(input.nextLine());
+                contactsManager.add(name, number);
+                System.out.println("Would you like to enter another contact? 1 for Y 2 for N");
+                userChoice = input.nextInt();
+            } while (userChoice == 1);
         } else if (userChoice == 2) {
-            contactsManager.displayContacts();
-            System.out.println("Enter name of contact to be removed");
-            input.nextLine();
-            String name = input.nextLine();
-            contactsManager.remove(name);
-
+            do {
+                contactsManager.displayContacts();
+                System.out.println("Enter name of contact to be removed");
+                input.nextLine();
+                String name = input.nextLine();
+                contactsManager.remove(name);
+                System.out.println("Would you like to delete another contact? 1 for Y 2 for N");
+                userChoice = input.nextInt();
+            } while (userChoice == 1);
         } else if (userChoice == 3) {
-            contactsManager.displayContacts();
-            System.out.println("Return to main ");
-
-        } else {
-            System.out.println("Invalid option");
+            do {
+                contactsManager.displayContacts();
+                System.out.println("Return to main? 1 for Y 2 for N");
+                userChoice = input.nextInt();
+            } while (userChoice == 2);
         }
     }
     //===== messageMenu =============================================
@@ -228,33 +236,42 @@ public class Main {
     private static void messageMenu(MessageManager messageManager, int userChoice) {
 
 
-        System.out.println("1. Add message\n2. Remove message\n3. Display all message\n 4. Return to Main Menu");
+        System.out.println("1. Add message\n2. Remove message\n3. Display all message\n4. Return to Main Menu");
         userChoice = input.nextInt();
         if (userChoice == 1) {
-            if (userChoice == 1) {
-                String userInput;
-                input.nextLine();
-                System.out.println("Message Name:\n");
-                //get user input
-                System.out.println("Enter your message here and place an \"`\" for the name placement.\n");
-                //get user msg
-            }
+            do {
+                if (userChoice == 1) {
+                    String userInput;
+                    input.nextLine();
+                    System.out.println("Message Name:\n");
+                    String title = input.nextLine();
+                    System.out.println("Enter your message here and place an \"`\" for the name placement.\n");
+                    String message = new String(input.nextLine());
+                    messageManager.add(title, message);
+                    System.out.println("Would you like to enter another message? 1 for Y 2 for N");
+                    userChoice = input.nextInt();
+                }
+            } while (userChoice == 1);
 
 
         } else if (userChoice == 2) {
-            // delete a message from the messageManager
-            System.out.println("What message would you like to delete?\n");
+            do {
+                /**Cant figure out how to work this menu its a bit different from the contacts manager **/
+                messageManager.displayByTitle();
+                System.out.println("Enter name of message to be removed");
+                input.nextLine();
+                String title = input.nextLine();
+                //remove the message from the messageManager.
+                System.out.println("Would you like to delete another message? 1 for Y 2 for N");
+                userChoice = input.nextInt();
+            } while (userChoice == 1);
 
 
         } else if (userChoice == 3) {
             //display all the current messages
-            System.out.println("Here is your saved messages.\n");
+            System.out.println("Here are your saved messages.\n");
+            messageManager.displayMessage();
 
-        } else if (userChoice == 4) {
-            return;
-        } else {
-            System.out.println("Invalid option");
-            return;
         }
 
     }
