@@ -24,7 +24,7 @@ import java.util.HashMap;
 
 public class ContactsManager {
     private static final String FILE_PATH = "src\\src\\data\\contacts.txt";
-    private HashMap<String, Integer> contactList;
+    private HashMap<String, String> contactList;
     private String curUsername;
     private static BufferedReader reader;
     private static PrintWriter writer;
@@ -49,7 +49,7 @@ public class ContactsManager {
     //===== getNumber ================================
     /** Returns the phone number of the passed in name. */
     //================================================
-    public Integer getNumber(String contactName) {
+    public String getNumber(String contactName) {
         return this.contactList.get(contactName);
     }
 
@@ -101,7 +101,7 @@ public class ContactsManager {
             String[] splitPair;
             for (String pair : data) {
                 splitPair = pair.split("/");
-                this.contactList.put(splitPair[0], Integer.parseInt(splitPair[1].trim()));
+                this.contactList.put(splitPair[0], splitPair[1].trim());
             }
             reader.close();
         } catch (IOException e) {
@@ -129,7 +129,7 @@ public class ContactsManager {
     /** adds a new contact with passed in name and numebr to
      * contactList */
     //=========================================================
-    public boolean add(String username, Integer number) {
+    public boolean add(String username, String number) {
         if (this.contactList.containsKey(username)) return false;
         this.contactList.put(username, number);
         return this.contactList.containsKey(username);

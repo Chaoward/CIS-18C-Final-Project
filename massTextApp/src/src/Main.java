@@ -195,7 +195,7 @@ public class Main {
             input.nextLine();
             String name = input.nextLine();
             System.out.println("Enter phone number:\n");
-            Integer number = new Integer(input.nextLine());
+            String number = new String(input.nextLine());
             contactsManager.add(name, number);
         } else if (userChoice == 2) {
             System.out.println("Enter name of contact to be removed");
