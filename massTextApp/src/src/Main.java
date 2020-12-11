@@ -177,7 +177,7 @@ public class Main {
         //Return input
         return input.nextInt();
     }
-    //===== messageMenu =============================================
+    //===== contactMenu =============================================
 
     /**
      * Displays possible actions and the inputs required to access the
@@ -210,7 +210,7 @@ public class Main {
             System.out.println("Invalid option");
         }
     }
-//===== contactsMenu =============================================
+    //===== messageMenu =============================================
 
     /**
      * Displays possible actions and the inputs required to access the
