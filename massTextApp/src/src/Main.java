@@ -71,7 +71,7 @@ public class Main {
                     } else if (userChoice == 2) {
                         messageMenu(messageManager, userChoice);
                     } else if (userChoice == 3) {
-                        messageBuilder(contactsManager, userChoice);
+                        messageSender(contactsManager, userChoice);
                     } else if (userChoice == 4) {
                         runLoop = false;
                         input.nextLine();
@@ -79,9 +79,12 @@ public class Main {
                         System.exit(0);
                     }
                 } while (runLoop == true);
+                contactsManager.logOut();
+                messageManager.logOut();
             }
 
         } while (runLoop2 == true);
+
 
     }
 
@@ -188,7 +191,7 @@ public class Main {
      */
     //================================================================
     public static void contactsMenu(ContactsManager contactsManager, int userChoice) {
-        System.out.println("1. Add Contact\n2. Remove Contact\n3. Display all Contacts\n 4. Return to Main Menu");
+        System.out.println("1. Add Contact\n2. Remove Contact\n3. Display all Contacts\n4. Return to Main Menu");
         userChoice = input.nextInt();
         if (userChoice == 1) {
             System.out.println("Enter name:\n");
@@ -198,7 +201,9 @@ public class Main {
             String number = new String(input.nextLine());
             contactsManager.add(name, number);
         } else if (userChoice == 2) {
+            contactsManager.displayContacts();
             System.out.println("Enter name of contact to be removed");
+            input.nextLine();
             String name = input.nextLine();
             contactsManager.remove(name);
 
@@ -254,7 +259,7 @@ public class Main {
 
     }
 
-    private static void messageBuilder(ContactsManager contactsManager, int userChoice) {
+    private static void messageSender(ContactsManager contactsManager, int userChoice) {
         if (userChoice == 3) {
             //run the message builder
         }
