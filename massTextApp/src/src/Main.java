@@ -21,17 +21,10 @@ public class Main {
     private static Scanner input = new Scanner(System.in);
     private static MessageManager messageManager = new MessageManager();
     private static ContactsManager contactsManager = new ContactsManager();
+    private static History history = new History();
     //For displaying correct user or password request
 
     public static void main(String[] args) throws IOException {
-//        final String FILE_PATH = "src\\src\\data\\messages.txt";
-//        try (FileWriter writer = new FileWriter("src\\src\\data\\messages.txt")) {
-//        }
-        //===== getUserName ==============================
-        //  THe login will be handled by an unordered
-        // collection (hashmap)
-        //================================================
-        // Will we implement username creation?
 
         boolean runLoop = true;
         boolean runLoop2 = true;
@@ -53,6 +46,7 @@ public class Main {
                 // If the password is correct move onto the User Interface loop.
             } else {
                 System.out.println("------Access Granted------\n");
+                runLoop = true;
                 contactsManager.retrieve(foundUser.getUsername());
                 messageManager.retrieve(foundUser.getUsername());
 
@@ -72,8 +66,11 @@ public class Main {
                     } else if (userChoice == 3) {
                         messageSender(userChoice);
                     } else if (userChoice == 4) {
-                        runLoop = false;
+                        //more history options can be explored
+                        history.display();
                     } else if (userChoice == 5) {
+                        runLoop = false;
+                    } else if (userChoice == 6) {
                         contactsManager.save();
                         messageManager.save();
                         System.exit(0);
@@ -81,6 +78,7 @@ public class Main {
                 } while (runLoop == true);
                 contactsManager.logOut();
                 messageManager.logOut();
+                history = new History();
             }
 
         } while (runLoop2 == true);
@@ -154,7 +152,7 @@ public class Main {
         }
         return temp;
     }
-    //===== menuMenu =============================================
+    //===== menuInput =============================================
 
     /**
      * Displays possible actions and the inputs required to access the
@@ -175,8 +173,9 @@ public class Main {
                 "1. Add/Remove/Display Contacts\n" +
                 "2. Add/Remove/Display Messages\n" +
                 "3. Send Message\n" +
-                "4. Log out\n" +
-                "5. Exit Program");
+                "4. Recent Activity\n" +
+                "5. Log out\n" +
+                "6. Exit Program");
 
         //Return input
         return input.nextInt();
@@ -215,7 +214,6 @@ public class Main {
         }
     }
     //===== messageMenu =============================================
-
     /**
      * Displays possible actions and the inputs required to access the
      * functions for MessageMenu
@@ -225,7 +223,11 @@ public class Main {
      */
     //================================================================
     private static void messageMenu(int userChoice) {
-        System.out.println("1. Add message\n2. Remove message\n3. Display all message\n 4. Return to Main Menu");
+        System.out.println("1. Add message\n" +
+                "2. Remove message\n" +
+                "3. Display all message\n" +
+                "4. Display messages by group\n" +
+                "5. Return to Main Menu");
         userChoice = input.nextInt();
         input.nextLine(); //clear buffer
 
@@ -264,6 +266,10 @@ public class Main {
             System.out.println("Here is your saved messages.\n");
             messageManager.displayMessage();
         }
+        else if (userChoice == 4) { //display by title
+            System.out.println("Enter Category Name: ");
+            messageManager.displayByTitle(input.nextLine());
+        }
 
     }
 
@@ -271,12 +277,18 @@ public class Main {
         System.out.println("Choose a message: ");
         messageManager.displayMessage();
         userChoice = input.nextInt();
+        if (userChoice >= messageManager.size()) {
+            System.out.println("Invalid Section, Canceled!");
+            return;
+        }
         Messages msg = messageManager.get(userChoice);
 
         System.out.println("Sending...\n\n");
         for (String name : contactsManager.nameSet()) {
             System.out.println("Sent: " + msg.nameInput(name));
             //push to history
+            history.push(msg.nameInput(name));
+
             /* SEND SMS CODE HERE */
         }
     }

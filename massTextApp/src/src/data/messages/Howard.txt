@@ -1,3 +1,4 @@
 random~hello this is a message
 ~Hello `, this is a prerecorded message please say hi back after the beep. BEEEEEEEPPPP!!!
-game~hey ` you play Apex?
+game~hey ` you want to play Apex?
+game~@` Minecraft?
