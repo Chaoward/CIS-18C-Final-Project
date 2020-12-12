@@ -21,11 +21,6 @@ public class User {
         return input.equals(this.password);
     }
 
-    //NOTE: this is dangerous to have here
-    public String getPassword() {
-        return this.password;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }

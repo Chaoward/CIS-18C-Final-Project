@@ -195,19 +195,19 @@ public class Main {
         userChoice = input.nextInt();
         input.nextLine(); //clear buffer
 
-        if (userChoice == 1) {
+        if (userChoice == 1) {  //add new contact
             System.out.println("Enter name:\n");
             String name = input.nextLine();
             System.out.println("Enter phone number:\n");
             String number = new String(input.nextLine());
             contactsManager.add(name, number);
-        } else if (userChoice == 2) {
+        } else if (userChoice == 2) {   //remove a contact
             contactsManager.displayContacts();
             System.out.println("Enter name of contact to be removed");
             String name = input.nextLine();
             contactsManager.remove(name);
 
-        } else if (userChoice == 3) {
+        } else if (userChoice == 3) {   //
             contactsManager.displayContacts();
         } else {
             System.out.println("Invalid option");

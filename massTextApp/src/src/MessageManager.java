@@ -3,6 +3,25 @@ package src;
 import java.io.*;
 import java.util.ArrayList;
 
+/***** MessageManager **************************
+ * This class manages the login user's messages
+ * and will write and read the user's message file.
+ * When retrieving messages, the data is stored in
+ * a collection (arrayList). The class will save to
+ * a file named as the user under the messages folder;
+ * category and message string is separated by "~".
+ *
+ * IMPORTANT: INSTANCE OBJ MUST CALL retrieve() TO
+ *         READ/EDIT THE USERS DATABASE!!!
+ *
+ * File Name: [Username].txt
+ *      - file is named after the user
+ *
+ * Save File Format:
+ *      - "~" : splits between title and message string
+ *      - white space under then "\n" messages are allowed
+ ************************************************/
+
 public class MessageManager {
     private static final String FOLDER_PATH = "src\\src\\data\\messages\\";
     private ArrayList<Messages> messageList;

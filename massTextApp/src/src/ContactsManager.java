@@ -10,12 +10,13 @@ import java.util.HashMap;
  * This class manages the current login user's contact
  * list, and will save updated info into a file. The
  * information is save by combining the username and
- * the contact list as one string.
+ * the contact list as one string. When retrieving contacts
+ * the class will read data into a unordered collection (Hashmap)
  *
  * IMPORTANT: INSTANCE OBJ MUST CALL retrieve() TO
  *          READ/EDIT THE USERS DATABASE!!!
  *
- * File Name: contacts.txt.txt
+ * File Name: contacts.txt
  *
  * Save File Format:
  *      - ";" : splits between userName and contactList
