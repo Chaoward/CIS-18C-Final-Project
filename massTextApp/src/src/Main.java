@@ -1,8 +1,6 @@
 package src;
 //import com.twilio.*;
 
-//NOTE: Why HashMaps pf password it's better just to have a collection of Users only
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -20,15 +18,15 @@ public class Main {
     private static final String USER_FILE_PATH = "src\\src\\data\\users.txt";
     private static ArrayList<User> users = new ArrayList();
     //Main Global Scanner
-    static Scanner input = new Scanner(System.in);
+    private static Scanner input = new Scanner(System.in);
+    private static MessageManager messageManager = new MessageManager();
+    private static ContactsManager contactsManager = new ContactsManager();
     //For displaying correct user or password request
 
     public static void main(String[] args) throws IOException {
 //        final String FILE_PATH = "src\\src\\data\\messages.txt";
 //        try (FileWriter writer = new FileWriter("src\\src\\data\\messages.txt")) {
 //        }
-        MessageManager messageManager = new MessageManager();
-        ContactsManager contactsManager = new ContactsManager();
         //===== getUserName ==============================
         //  THe login will be handled by an unordered
         // collection (hashmap)
@@ -49,7 +47,7 @@ public class Main {
             //
             User foundUser = linearUserSearch(username, password);
 
-            if (foundUser == null || !foundUser.passwordEquals(password)) {
+            if (foundUser == null) {
                 System.out.println("Login attempt failed user or password are incorrect");
                 //attempt counter here?
                 // If the password is correct move onto the User Interface loop.
@@ -63,19 +61,21 @@ public class Main {
                 do {
                     //Display message menu and get choice
                     userChoice = menuInput(username);
+                    input.nextLine(); //clear buffer
+
                     //Examine input
                     if (userChoice == 1) {
                         //Display contact menu and get choice
-                        //userChoice = menuInput(username, "contact menu");
-                        contactsMenu(contactsManager, userChoice);
+                        contactsMenu(userChoice);
                     } else if (userChoice == 2) {
-                        messageMenu(messageManager, userChoice);
+                        messageMenu(userChoice);
                     } else if (userChoice == 3) {
-                        messageSender(contactsManager, userChoice);
+                        messageSender(userChoice);
                     } else if (userChoice == 4) {
                         runLoop = false;
-                        input.nextLine();
                     } else if (userChoice == 5) {
+                        contactsManager.save();
+                        messageManager.save();
                         System.exit(0);
                     }
                 } while (runLoop == true);
@@ -147,13 +147,14 @@ public class Main {
         //searches through all users to match inputted values
         for (int i = 0; searching && i < users.size(); ++i) {
             if (users.get(i).getUsername().equals(u)) {
-                temp = users.get(i);
+                //return null if password is wrong
+                temp = users.get(i).passwordEquals(p) ? users.get(i) : null;
                 searching = false;
             }
         }
         return temp;
     }
-    //===== messageMenu =============================================
+    //===== menuMenu =============================================
 
     /**
      * Displays possible actions and the inputs required to access the
@@ -168,7 +169,7 @@ public class Main {
     //========================================================
     public static int menuInput(String u) {
         //Display message action menu
-        System.out.println("Hello " + u +
+        System.out.println("\nHello " + u +
                 ", Welcome to the Mass Text Message Sender!\n" +
                 "What would you like to do? \n" +
                 "1. Add/Remove/Display Contacts\n" +
@@ -190,12 +191,13 @@ public class Main {
      * int userChoice
      */
     //================================================================
-    public static void contactsMenu(ContactsManager contactsManager, int userChoice) {
+    public static void contactsMenu(int userChoice) {
         System.out.println("1. Add Contact\n2. Remove Contact\n3. Display all Contacts\n4. Return to Main Menu");
         userChoice = input.nextInt();
+        input.nextLine(); //clear buffer
+
         if (userChoice == 1) {
             System.out.println("Enter name:\n");
-            input.nextLine();
             String name = input.nextLine();
             System.out.println("Enter phone number:\n");
             String number = new String(input.nextLine());
@@ -203,14 +205,11 @@ public class Main {
         } else if (userChoice == 2) {
             contactsManager.displayContacts();
             System.out.println("Enter name of contact to be removed");
-            input.nextLine();
             String name = input.nextLine();
             contactsManager.remove(name);
 
         } else if (userChoice == 3) {
             contactsManager.displayContacts();
-            System.out.println("Return to main ");
-
         } else {
             System.out.println("Invalid option");
         }
@@ -225,38 +224,60 @@ public class Main {
      * int userChoice
      */
     //================================================================
-    private static void messageMenu(MessageManager messageManager, int userChoice) {
-
-
+    private static void messageMenu(int userChoice) {
         System.out.println("1. Add message\n2. Remove message\n3. Display all message\n 4. Return to Main Menu");
         userChoice = input.nextInt();
-        if (userChoice == 1) {
-            if (userChoice == 1) {
-                String userInput;
-                input.nextLine();
-                System.out.println("Message Name:\n");
-                //get user input
-                System.out.println("Enter your message here and place an \"`\" for the name placement.\n");
-                //get user msg
+        input.nextLine(); //clear buffer
+
+        if (userChoice == 1) {  //adding msg
+            String newTitle;
+            String newMessage;
+
+            System.out.println("Enter your message here and place an \"`\" for the name placement.\n");
+            //get user msg
+            newMessage = input.nextLine();
+            System.out.println("Tag Category?\n1.) YES\n2.)NO ");
+            if (input.nextInt() == 1) {
+                input.nextLine(); //clear buffer
+                System.out.println("Enter Category: ");
+                newTitle = input.nextLine();
+                messageManager.add(newMessage, newTitle);
+                return;
             }
+            messageManager.add(newMessage);
 
-
-        } else if (userChoice == 2) {
+        } else if (userChoice == 2) {   //removing msg
+            if (messageManager.size() == 0) {
+                System.out.println("No messages to delete");
+                return;
+            }
             // delete a message from the messageManager
-            System.out.println("What message would you like to delete?\n");
+            System.out.println("What message would you like to delete? (negative to cancel)\n");
+            messageManager.displayMessage();
+            userChoice = input.nextInt();
+            input.nextLine(); //clear buffer
+            if (userChoice < 0) return; //canceled
+            messageManager.remove(userChoice);
 
-
-        } else if (userChoice == 3) {
+        } else if (userChoice == 3) {   //display msg
             //display all the current messages
             System.out.println("Here is your saved messages.\n");
-
+            messageManager.displayMessage();
         }
 
     }
 
-    private static void messageSender(ContactsManager contactsManager, int userChoice) {
-        if (userChoice == 3) {
-            //run the message builder
+    private static void messageSender(int userChoice) {
+        System.out.println("Choose a message: ");
+        messageManager.displayMessage();
+        userChoice = input.nextInt();
+        Messages msg = messageManager.get(userChoice);
+
+        System.out.println("Sending...\n\n");
+        for (String name : contactsManager.nameSet()) {
+            System.out.println("Sent: " + msg.nameInput(name));
+            //push to history
+            /* SEND SMS CODE HERE */
         }
     }
 }

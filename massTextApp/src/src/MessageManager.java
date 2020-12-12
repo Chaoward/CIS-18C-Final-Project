@@ -17,10 +17,11 @@ public class MessageManager {
 
 
     //===== retrieve ==================================
-    /**  */
+    /** retrieves the passed in user's messages and stores
+     * them into the current messageList. */
     //=================================================
     public void retrieve(String username) {
-        //logout function here
+        logOut();
 
         try {
             reader = new BufferedReader(new FileReader(FOLDER_PATH + username + ".txt"));
@@ -45,7 +46,9 @@ public class MessageManager {
     //===== *END* retrieve *END* ==============================
 
 
-
+    //===== displayMessage ====================================
+    /** Display the current messageList with their index and titles. */
+    //=========================================================
     public void displayMessage() {
         System.out.println("Index\t:\tCategory\t:\tMessage\n");
         for (Messages msg : this.messageList) {
@@ -55,37 +58,57 @@ public class MessageManager {
         }
     }
 
+    //===== displayByTitle =======================================
+    /** Display all messages in the current list that belong to the
+     * passed title. */
+    //============================================================
+    public void displayByTitle(String title) {
+        if (title.isBlank()) title = "";
+        System.out.println("Category: " + (title.equals("") ? "no category" : title)
+                + "\nIndex\t:\tMessage");
 
-    public void displayByTitle() {
-
+        for (Messages msg : this.messageList) {
+            if (msg.getTitle().equals(title)) {
+                System.out.println(this.messageList.indexOf(msg) + ".) " + msg.getContent());
+            }
+        }
     }
 
+    //===== get ==============================================
+    public Messages get(int i) {
+        return messageList.get(i);
+    }
 
     //===== add ===============================================
-    /** adds a  */
+    /** adds a new message to the arrayList. */
+    //=========================================================
+    public boolean add(String message) {
+        Messages newMsg = new Messages(message);
+        this.messageList.add(newMsg);
+        return this.messageList.contains(newMsg);
+    }
+
+    //===== add ===============================================
+    /** adds a new message to the arrayList with a category. */
     //=========================================================
     public boolean add(String message, String title) {
         Messages newMsg = new Messages(message, title);
         this.messageList.add(newMsg);
         return this.messageList.contains(newMsg);
     }
-    //===== *END* add *END* ====================================
-
-
 
     //===== remove ===========================================
     /** removes the passed in username from contactList */
     //========================================================
-    public boolean remove(int index) {
+    public void remove(int index) {
         this.messageList.remove(index);
-        return this.messageList.get(index) == null;
+        System.out.println("Removed!");
     }
-    //===== *END* remove *END* ===============================
 
 
 
     //===== save =============================================
-    /** updates save file */
+    /** updates save file. */
     //========================================================
     public void save() {
         File msgFile = new File((FOLDER_PATH + this.curUsername + ".txt"));
@@ -116,5 +139,11 @@ public class MessageManager {
         this.curUsername = "";
     }
     //===== *END* logOut *END* ===============================
+
+
+    //===== size ==============================================
+    public int size() {
+        return this.messageList.size();
+    }
 
 }

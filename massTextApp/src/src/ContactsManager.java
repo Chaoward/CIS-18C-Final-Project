@@ -1,6 +1,7 @@
 package src;
 
 import java.io.*;
+import java.util.Set;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -63,14 +64,20 @@ public class ContactsManager {
         String num = this.contactList.get(userName).toString();
         //if number is 10 or greater digits, use phone# format else return # as is
         return num.length() >= 10 ?
-                "(" + num.substring(0, 2) + ")-" + num.substring(3, 5) + "-" + num.substring(6) :
+                "(" + num.substring(0, 3) + ")-" + num.substring(3, 6) + "-" + num.substring(6) :
                 num;
     }
 
+    //===== nameSet ===================================
+    /** Returns the name Set. */
+    //=================================================
+    public Set<String> nameSet() {
+        return this.contactList.keySet();
+    }
 
 
     //===== retrieve ==================================
-    /** reads contacts.txt.txt and retrieves the passed in
+    /** reads contacts.txt and retrieves the passed in
      * user's contact list as a single string. Splits the string
      * into pairs of name and number and store s them together in contactList */
     //=================================================
@@ -143,6 +150,7 @@ public class ContactsManager {
     //========================================================
     public boolean remove(String username) {
         if (this.contactList.containsKey(username)) {
+            System.out.println("Removed!");
             return this.contactList.remove(username, this.contactList.get(username));
         }
         return !this.contactList.containsKey(username);
