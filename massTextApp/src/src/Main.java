@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /***** MASS TEXT MESSAGE SENDER ******************
+ * Authors: HowardN, Adian, JasonJ, CarlosG
+ *
  * This program will take message template or a user
  * written message then take the users contacts.txt and
  * send a personalized message to each contact using
