@@ -29,6 +29,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         boolean runLoop = true;
+
+
         boolean runLoop2 = true;
 
         // the first do while run loop starts here for the login
@@ -77,6 +79,7 @@ public class Main {
                         messageManager.save();
                         System.exit(0);
                     }
+
                 } while (runLoop == true);
                 contactsManager.logOut();
                 messageManager.logOut();
@@ -99,12 +102,14 @@ public class Main {
                 users.add(new User(lineData[0], lineData[1]));
             }
 
+
             reader.close();
         } catch (IOException e) {
             System.out.println(e.toString());
         }
     }
     //===== getUserOrPassword =============================================
+
 
     /**
      * Utilizes input to either display text that asks for a password or
@@ -216,6 +221,7 @@ public class Main {
         }
     }
     //===== messageMenu =============================================
+
     /**
      * Displays possible actions and the inputs required to access the
      * functions for MessageMenu
@@ -267,8 +273,7 @@ public class Main {
             //display all the current messages
             System.out.println("Here is your saved messages.\n");
             messageManager.displayMessage();
-        }
-        else if (userChoice == 4) { //display by title
+        } else if (userChoice == 4) { //display by title
             System.out.println("Enter Category Name: ");
             messageManager.displayByTitle(input.nextLine());
         }
